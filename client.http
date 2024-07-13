@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:3000
+
+# @name creaet_account
+
+POST {{baseUrl}}/users/accounts/create
+Content-Type: application/json
+
+{
+    "name" : "Teste HTTP Client",
+    "email" : "test-client@http.com",
+    "password" : "123456"
+}
+
+###
