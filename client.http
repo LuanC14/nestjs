@@ -1,7 +1,6 @@
 @baseUrl = http://localhost:3000
 
 # @name creaet_account
-
 POST {{baseUrl}}/users/accounts/create
 Content-Type: application/json
 
@@ -12,3 +11,12 @@ Content-Type: application/json
 }
 
 ###
+
+# @name authenticate
+POST {{baseUrl}}/auth
+Content-Type: application/json
+
+{
+    "email" : "test-client@http.com",
+    "password" : "123456"
+}
