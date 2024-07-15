@@ -1,17 +1,8 @@
 import { Body, Controller, Post, UnauthorizedException, UsePipes } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcryptjs";
-import { ZodValidationPipe } from "src/pipes/zod-validation.pipe";
 import { PrismaService } from "src/prisma/prisma.service";
-import { z } from "zod";
-
-
-const authenticateBodySchema = z.object({
-    email: z.string().email(),
-    password: z.string()
-})
-
-type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
+import { AuthenticateBodySchema, authenticateBodyValidate } from "./validators/authenticate-body-schema";
 
 @Controller('/auth')
 export class AuthController {
@@ -21,8 +12,7 @@ export class AuthController {
         private prismaService: PrismaService) { }
 
     @Post()
-    @UsePipes(new ZodValidationPipe(authenticateBodySchema))
-    async authenticate(@Body() body: AuthenticateBodySchema) {
+    async authenticate(@Body(authenticateBodyValidate) body: AuthenticateBodySchema) {
         const { email, password } = body
 
         const user = await this.prismaService.user.findUnique({
