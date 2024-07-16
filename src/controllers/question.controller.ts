@@ -38,8 +38,13 @@ export class QuestionController {
 
         const questions = await this.prismaService.question.findMany({
             take: itemsPerPage,
-            skip: (page - 1) * itemsPerPage 
+            skip: (page - 1) * itemsPerPage,
+            orderBy: {
+                createdAt: 'desc',
+            },
         })
+
+        return { questions }
     }
 
     private convertToSlug(title: string): string {
