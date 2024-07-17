@@ -3,7 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { Body } from "@nestjs/common";
 import { ConflictException } from "@nestjs/common";
 import { hash } from 'bcryptjs'
-import { CreateAccountBodySchema, createAccountBodyValidate } from "./validators/create-account-body-schema";
+import { CreateAccountBodySchema, createAccountBodyValidate } from "./create-account-body-schema";
 
 @Controller('/users')
 export class UserController {

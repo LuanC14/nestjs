@@ -2,7 +2,7 @@ import { Body, Controller, Post, UnauthorizedException, UsePipes } from "@nestjs
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcryptjs";
 import { PrismaService } from "src/prisma/prisma.service";
-import { AuthenticateBodySchema, authenticateBodyValidate } from "./validators/authenticate-body-schema";
+import { AuthenticateBodySchema, authenticateBodyValidate } from "./authenticate-body-schema";
 
 @Controller('/auth')
 export class AuthController {
@@ -34,7 +34,7 @@ export class AuthController {
         const acessToken = this.jwtService.sign({ sub: user.id })
 
         return {
-            acess_token: acessToken
+            access_token: acessToken
         }
     }
 }

@@ -1,9 +1,9 @@
-import { Body, Controller, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { CurrentUser } from "src/modules/auth/current-user.decorator";
 import { UserByTokenPayload } from "src/modules/auth/jwt.strategy";
 import { PrismaService } from "src/prisma/prisma.service";
-import { createQuestionBodyValidate, CreateQuestionBodySchema } from './validators/create-question-body-schema';
+import { createQuestionBodyValidate, CreateQuestionBodySchema } from './create-question-body-schema';
 import { pageQueryValidationPipe } from "src/core/validators/page-query-param-schema";
 
 @UseGuards(AuthGuard('jwt'))
@@ -32,9 +32,10 @@ export class QuestionController {
         return { data: entity }
     }
 
+    @Get()
     async fetchRecentQuestions(@Query('page', pageQueryValidationPipe) page: number) {
 
-        const itemsPerPage = 1
+        const itemsPerPage = 20
 
         const questions = await this.prismaService.question.findMany({
             take: itemsPerPage,

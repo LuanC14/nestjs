@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@auth_token = {{authenticate.response.body.acess_token}}
+@auth_token = {{authenticate.response.body.access_token}}
 
 # @name create_account
 POST {{baseUrl}}/users/accounts/create
