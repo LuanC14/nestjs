@@ -60,4 +60,4 @@ data
 
 # Keys
 private_key.pem
-public_key
+public_key.pem
